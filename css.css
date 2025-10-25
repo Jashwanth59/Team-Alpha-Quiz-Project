@@ -18,7 +18,39 @@ header {
     flex: 9;
     float: left;
     border: 1px solid black;
-    padding: 20px;
+    padding: 40px;
+}
+
+#page-titles{
+    margin: 0;
+}
+
+#credits-body h3 {
+    margin-left: 40px;
+    text-decoration: underline;
+}
+
+#credits-body  h4 {
+    margin-left: 80px;
+}
+
+#about-body h3 {
+    margin-left: 40px;
+    text-decoration: underline;
+}
+
+#about-body h4 {
+    margin-left: 80px;
+    font-weight: normal;
+}
+
+#contact-body li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+#contact-body label {
+    margin-right: 10px;
 }
 
 .side-navbar,
