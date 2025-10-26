@@ -1,12 +1,19 @@
+ @font-face {
+      font-family: Roboto;
+      src: url(fonts/Roboto-VariableFont.ttf);
+    }
+
+
 body {
     margin: 0px;
+    background-color: rgb(148, 161, 135);
+    font-family: Roboto;
 }
 
 header {
-    color: red;
     text-align: center;
     padding: 20px;
-    border: 1px solid black;
+    border-bottom: 1px solid rgb(58, 64, 90);
 }
 
 .body-content{
@@ -17,7 +24,7 @@ header {
 .main-body{
     flex: 9;
     float: left;
-    border: 1px solid black;
+    border: 1px solid rgb(58, 64, 90);
     padding: 40px;
 }
 
@@ -25,22 +32,29 @@ header {
     margin: 0;
 }
 
-#credits-body h3 {
-    margin-left: 40px;
-    text-decoration: underline;
+#timer {
+    margin: 0;
+    float: right;
+
 }
 
-#credits-body  h4 {
+.main-body h3 {
+    margin-left: 40px;
+}
+
+.main-body h4 {
     margin-left: 80px;
 }
 
+#credits-body h3{
+    text-decoration: underline;
+}
+
 #about-body h3 {
-    margin-left: 40px;
     text-decoration: underline;
 }
 
 #about-body h4 {
-    margin-left: 80px;
     font-weight: normal;
 }
 
@@ -58,7 +72,7 @@ header {
 .side-navbar ul li {
     display: flex;
     align-items: center;
-    min-width: 100px;
+    min-width: 150px;
     flex-direction: column;
 }
 
@@ -74,6 +88,10 @@ header {
 
 .side-navbar li{
     list-style-type: none;
+    font-weight: Bold;
+    margin-bottom: 10px;
+    background-color: rgb(58, 64, 90);
+    color: #58c3c3;
 }
 
 .side-navbar a {
@@ -82,7 +100,7 @@ header {
 }
 
 .side-navbar #admin{
-    color: red;
+    color: #eb4242;
     align-self: flex-end;
 }
 
@@ -95,7 +113,7 @@ header {
     display: flex;
     margin: 0;
     justify-content: center;
-    border: 1px solid red;
+    border: 1px solid rgb(58, 64, 90);
 }
 
 .footer-nav li{
