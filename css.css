@@ -17,7 +17,6 @@ header {
 }
 
 .body-content{
-    height: 80%;
     display: flex;
 }
 
@@ -28,7 +27,7 @@ header {
     padding: 40px;
 }
 
-#page-titles{
+.page-titles{
     margin: 0;
 }
 
@@ -36,6 +35,10 @@ header {
     margin: 0;
     float: right;
 
+}
+
+.hiddenAnswer {
+    visibility: hidden;
 }
 
 .main-body h3 {

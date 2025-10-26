@@ -1,8 +1,8 @@
 function timer() {
     // Set the date we're counting down to
     var time = new Date();
-    const countDownDate = new Date(time); // Create a new Date object to avoid modifying 'now'
-    countDownDate.setHours(countDownDate.getHours() + 1); // Add one hour
+    const timerEnd = new Date(time); // Create a new Date object to avoid modifying 'now'
+    timerEnd.setHours(timerEnd.getHours() + 1); // Add one hour
 
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -11,7 +11,7 @@ function timer() {
         var now = new Date().getTime();
             
         // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+        var distance = timerEnd - now;
             
         // Time calculations for days, hours, minutes and seconds
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -30,3 +30,48 @@ function timer() {
     }, 1000);
 }
 
+var lastClicked;
+
+function answer(buttonElement) {
+    const selectedInput = buttonElement.textContent;
+
+    const selectedClass = buttonElement.className;
+
+        var questions = document.getElementsByClassName(selectedClass);
+
+        for (let i = 0; i < questions.length; i++) {
+            questions[i].style.backgroundColor = '';
+        }
+
+        buttonElement.style.backgroundColor = 'green';
+
+        document.getElementById("answer" + selectedClass).innerHTML = selectedInput;
+    
+}
+
+function submitExam() {
+
+    var answers = document.getElementsByClassName('answer');
+
+    var numCorrect = 0;
+
+    var quizQuestions = 0;
+
+    var quizScore = 0;
+
+    for (let i = 0; i < answers.length; i++) {
+        if (document.getElementById("correctAnswerq" + (i + 1)).innerHTML == answers[i].innerHTML){
+            numCorrect += 1;
+        }
+        quizQuestions += 1;
+    }
+
+    quizScore = (numCorrect/quizQuestions) * 100;
+
+    document.getElementById("score").innerHTML = quizScore + '%';
+
+    if (quizScore == 100){
+        document.getElementById("score").innerHTML += " Your Winner";
+    }
+    
+}
