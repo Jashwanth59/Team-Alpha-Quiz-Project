@@ -1,3 +1,6 @@
+var testDone = false;
+
+
 function timer() {
     // Set the date we're counting down to
     var time = new Date();
@@ -26,6 +29,10 @@ function timer() {
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("timer").innerHTML = "EXPIRED";
+        } else if (testDone == true) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = hours + "h "
+        + minutes + "m " + seconds + "s ";
         }
     }, 1000);
 }
@@ -33,9 +40,11 @@ function timer() {
 var lastClicked;
 
 function answer(buttonElement) {
-    const selectedInput = buttonElement.textContent;
 
-    const selectedClass = buttonElement.className;
+    if (testDone == false) {
+        const selectedInput = buttonElement.textContent;
+
+        const selectedClass = buttonElement.className;
 
         var questions = document.getElementsByClassName(selectedClass);
 
@@ -46,32 +55,39 @@ function answer(buttonElement) {
         buttonElement.style.backgroundColor = 'green';
 
         document.getElementById("answer" + selectedClass).innerHTML = selectedInput;
+    }
     
 }
 
 function submitExam() {
 
-    var answers = document.getElementsByClassName('answer');
+    if (testDone == false) {
 
-    var numCorrect = 0;
+        var answers = document.getElementsByClassName('answer');
 
-    var quizQuestions = 0;
+        var numCorrect = 0;
 
-    var quizScore = 0;
+        var quizQuestions = 0;
 
-    for (let i = 0; i < answers.length; i++) {
-        if (document.getElementById("correctAnswerq" + (i + 1)).innerHTML == answers[i].innerHTML){
-            numCorrect += 1;
+        var quizScore = 0;
+
+        for (let i = 0; i < answers.length; i++) {
+            if (document.getElementById("correctAnswerq" + (i + 1)).innerHTML == answers[i].innerHTML){
+                numCorrect += 1;
+            }
+            quizQuestions += 1;
         }
-        quizQuestions += 1;
-    }
 
-    quizScore = (numCorrect/quizQuestions) * 100;
+        quizScore = (numCorrect/quizQuestions) * 100;
 
-    document.getElementById("score").innerHTML = quizScore + '%';
+        document.getElementById("score").innerHTML = quizScore + '%';
 
-    if (quizScore == 100){
-        document.getElementById("score").innerHTML += " Your Winner";
-    }
-    
+        if (quizScore == 100){
+            document.getElementById("score").innerHTML += " Your Winner";
+        }
+
+        testDone = true;
+
+    } 
+
 }
