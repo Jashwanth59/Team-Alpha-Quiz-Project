@@ -19,9 +19,7 @@ import { signInUsernamePassword, createAccountWithUsernamePassword, addDocument,
 
 export class BackendExtensionService {
 
-    constructor(db) {
-        this.db = db;
-    }
+    constructor() {}
 
     // -------------------- Account Methods --------------------
 
