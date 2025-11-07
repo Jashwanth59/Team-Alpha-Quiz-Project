@@ -100,7 +100,7 @@ export class BackendExtensionService {
         return {
             question: item.question,
             choices: this.#arrayToObject(item.choices),
-            answer: item.answer
+            correctAnswer: item.correctAnswer
         };
     }
     #arrayToObject(array) {
@@ -120,6 +120,5 @@ export class BackendExtensionService {
         quiz.timerLength = parsedQuiz.timerLength;
         quiz.numQuestions = parsedQuiz.numQuestions;
         quiz.studentScores = studentScores;
-        let test = new Quiz(true);
     }
 }
