@@ -120,6 +120,5 @@ export class BackendExtensionService {
         quiz.timerLength = parsedQuiz.timerLength;
         quiz.numQuestions = parsedQuiz.numQuestions;
         quiz.studentScores = studentScores;
-        let test = new Quiz(true);
     }
 }
