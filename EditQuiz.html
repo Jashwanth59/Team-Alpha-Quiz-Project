@@ -40,6 +40,7 @@
 
                 <li><label for="quizNameInput">Name of Quiz:</label></li>
                 <li><input type="text" id="quizNameInput" name="quizName"></li>
+
                 <table id="quizQuestionList">
                     <tr>
                         <th>Question</th>
@@ -47,18 +48,15 @@
                         <th>Answer B</th>
                         <th>Answer C</th>
                         <th>Answer D</th>
-                        <th>Correct Answer</td>
+                        <th>Correct Answer</th>
                     </tr>
                 </table>
-                <li><button type="button" onclick="addTableRow()">Add possible question</button></li>
-                <li><button type="button" onclick="createNewQuiz()">Create Quiz</button></li>
-
-
 
                 <li><button type="button" onclick="window.location.href='AdminControlPanel.html'">Go Back</button></li>
             </ul>
         </div>
     </div>
+
 </section>
 
 <footer>
@@ -79,6 +77,13 @@
     </div>
 </footer>
 <body>
-
+<script>
+    function onloaded() {
+        editQuiz();
+    }
+    window.onload = function() {
+        onloaded();
+    }
+</script>
 </body>
 </html>

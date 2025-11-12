@@ -12,5 +12,16 @@ export class Quiz {
         this.timerLength = timerLength;
         this.numQuestions = numQuestions;
     }
-
+    getQuizId() {
+        return this.id;
+    }
+    getQuestionCount() {
+        return this.numQuestions;
+    }
+    getOwnerId() {
+        return this.ownerId;
+    }
+    getTimerLength() {
+        return this.timerLength;
+    }
 }

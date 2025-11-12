@@ -1,7 +1,6 @@
 import {BackendExtensionService} from "./BackendExtensionService.js";
 import {Item} from "./Item.js";
 import {Quiz} from "./Quiz.js";
-import {StudentScore} from "./StudentScore.js";
 
 function addTableRow() {
     let table = document.getElementById("quizQuestionList");
@@ -55,8 +54,67 @@ function defineItems() {
 
 }
 
+async function listQuizzes() {
+    let docIds = await service.getAllQuizIDS()
+
+    let table = document.getElementById("quizListTable");
+
+    for (let i = table.rows.length - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }
+    console.log("table cleared!");
+    console.log(docIds);
+
+    for (let i = 0; i < docIds.length; i++) {
+
+        let quiz = await service.getQuiz(docIds[i]);
+        let quizId = quiz.getQuizId()
+
+        let row = table.insertRow(-1);
+
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        let cell3 = row.insertCell(2);
+        let cell4 = row.insertCell(3);
+        let cell5 = row.insertCell(4);
+        let cell6 = row.insertCell(5);
+
+        cell1.innerHTML = quizId;
+        cell2.innerHTML = quiz.getQuestionCount();
+        cell3.innerHTML = quiz.getOwnerId();
+        cell4.innerHTML = quiz.getTimerLength();
+        cell5.innerHTML = "<button onclick=\"window.location.href='EditQuiz.html'\">Edit</button>";
+        cell6.innerHTML = "<button onclick='deleteQuiz(this)'>Delete</button>";
+
+
+    }
+
+}
+
+function editQuiz(button) {
+    const row = button.closest('tr');
+    const id = row.cells[0].textContent;
+    let quiz = service.getQuiz(id);
+    document.getElementById('quizQuestionAmountInput').value = quiz.getQuestionCount();
+
+}
+
+function deleteQuiz(button) {
+    const row = button.closest('tr');
+    const id = row.cells[0].textContent;
+    if(confirm("Are you sure you want to delete this quiz?")){
+        console.log("deleting quiz " + id);
+        console.log(service.deleteQuiz(id));
+        listQuizzes();
+    }
+}
+
+
 
 // These are crucial to making the functions work when there is an import statement
 // I regret ever entertaining the idea of making this a web app ;-;
 window.addTableRow = addTableRow;
 window.createNewQuiz = await createNewQuiz;
+window.listQuizzes = listQuizzes;
+window.editQuiz = editQuiz;
+window.deleteQuiz = deleteQuiz;

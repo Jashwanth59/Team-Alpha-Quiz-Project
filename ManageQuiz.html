@@ -32,33 +32,21 @@
         <div class="main-body" id="contact-body">
             <h2 class="page-titles">Admin Control Panel:</h2>
             <ul>
-                <li><label for="quizQuestionAmountInput">Amount of questions:</label></li>
-                <li><input type="number" id="quizQuestionAmountInput" name="Questions" min="0" max="100" step="1"></li>
-
-                <li><label for="timerLengthInput">Timer (minutes):</label></li>
-                <li><input type="number" id="timerLengthInput" name="timerLength" min="0" max="120" step="1"></li>
-
-                <li><label for="quizNameInput">Name of Quiz:</label></li>
-                <li><input type="text" id="quizNameInput" name="quizName"></li>
-                <table id="quizQuestionList">
+                <li>Quizzes:</li>
+                <table id="quizListTable">
                     <tr>
-                        <th>Question</th>
-                        <th>Answer A</th>
-                        <th>Answer B</th>
-                        <th>Answer C</th>
-                        <th>Answer D</th>
-                        <th>Correct Answer</td>
+                        <th>Name/Id:</th>
+                        <th>Questions Count:</th>
+                        <th>Owner Id:</th>
+                        <th>Timer Length:</th>
                     </tr>
                 </table>
-                <li><button type="button" onclick="addTableRow()">Add possible question</button></li>
-                <li><button type="button" onclick="createNewQuiz()">Create Quiz</button></li>
-
-
 
                 <li><button type="button" onclick="window.location.href='AdminControlPanel.html'">Go Back</button></li>
             </ul>
         </div>
     </div>
+
 </section>
 
 <footer>
@@ -79,6 +67,13 @@
     </div>
 </footer>
 <body>
-
+    <script>
+        function onloaded() {
+            listQuizzes();
+        }
+        window.onload = function() {
+            onloaded();
+        }
+    </script>
 </body>
 </html>
