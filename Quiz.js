@@ -12,5 +12,4 @@ export class Quiz {
         this.timerLength = timerLength;
         this.numQuestions = numQuestions;
     }
-
 }

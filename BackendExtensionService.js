@@ -4,7 +4,6 @@ import { Item } from './Item.js';
 import { StudentScore } from './StudentScore.js';
 
 
-
 export class BackendExtensionService {
     test = 1;
 
@@ -12,15 +11,10 @@ export class BackendExtensionService {
 
     // -------------------- Account Methods --------------------
 
-    // Keep in mind the database has two collections (Folders) users and quizzes by default and within
-    // those collections have documents (In the form of js objects).
-
-    // Sign in by checking email and password in 'users' collection
     async signIn(username, password) {
         return await signInUsernamePassword(username, password);
     }
 
-    // Create a new account under 'users'
     async createAccount(adminId, username, password, role) {
         return await createAccountWithUsernamePassword(adminId, username, password, role);
     }
@@ -69,7 +63,7 @@ export class BackendExtensionService {
     // -------------------------- "Magic" Helper Functions for other methods --------------------------
     // Quiz method Helper funcitons for parsing quiz to be saved to DB
     #parseQuizForDatabase(quiz) {
-
+        
         const itemsAsObject = Object.fromEntries(
             quiz.items.map((item, index) => [index, this.#itemToObject(item)])
         );
