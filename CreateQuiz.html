@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Sign In</title>
-    <link rel="stylesheet" href="css.css">
-    <script type="module" src="quizManagement.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign In</title>
+        <link rel="stylesheet" href="css.css">
+        <script type="module" src="quizManagement.js"></script>
+    </head>
 
 <header>
     <div class="header-content">
@@ -42,12 +37,12 @@
                 <li><input type="text" id="quizNameInput" name="quizName"></li>
                 <table id="quizQuestionList">
                     <tr>
-                        <td>Question</td>
-                        <td>Answer A</td>
-                        <td>Answer B</td>
-                        <td>Answer C</td>
-                        <td>Answer D</td>
-                        <td>Correct Answer</td>
+                        <th>Question</th>
+                        <th>Answer A</th>
+                        <th>Answer B</th>
+                        <th>Answer C</th>
+                        <th>Answer D</th>
+                        <th>Correct Answer</th>
                     </tr>
                 </table>
                 <li><button type="button" onclick="addTableRow()">Add possible question</button></li>
@@ -55,7 +50,7 @@
 
 
 
-                <li><button>Go Back</button></li>
+                <li><button type="button" onclick="window.location.href='AdminControlPanel.html'">Go Back</button></li>
             </ul>
         </div>
     </div>

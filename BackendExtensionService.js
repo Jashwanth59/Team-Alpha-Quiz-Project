@@ -44,7 +44,7 @@ export class BackendExtensionService {
     async getAllUserIDS() {
         return await getDocumentIDS("users");
     }
-    async getAllQuizeIDS() {
+    async getAllQuizIDS() {
         return await getDocumentIDS("quizzes");
     }
 
