@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="css.css">
+    <script src="contact.js"></script>
 </head>
 
 <header>   
@@ -27,13 +28,16 @@
         <div class="main-body" id="contact-body">
             <h2 class="page-titles">Contact Us:</h2>
             <ul>
+                <form action="https://formspree.io/f/xblqjvrp" method="POST">
                 <li><label for="username">Name:</label><input type="text" id="name" name="name" placeholder="Enter your name"></li>
                 <li><label for="email">Email:</label><input type="text" id="email" name="email" placeholder="Enter your email"></li>
-                <li><label for="phone-number">Phone Number:</label><input type="text" id="phone-number" name="phone-number" placeholder="Enter your phone number"></li>
+                <li><label for="phone-number">Phone Number:</label><input type="tel" id="phone-number" name="phone-number" placeholder="Enter your phone number"></li>
                 <li><label for="message">Message:</label></li>
                 <li id="admin"><textarea id="message" name="message" rows="5" cols="40" placeholder="Enter your message here..."></textarea></li>
-                <li><button type="button" id="send-message">Send Message</button></li>
+                <li><button type="submit" id="send-message">Send Message</button></li>
+                </form>
             </ul>
+
         </div>
     </div>
 </section>
@@ -42,16 +46,15 @@
     <div class="footer-content">
         <nav class="footer-nav">
             <ul>
-                <li><a href="https://www.facebook.com/"><img src="images\Facebook.png" alt="Facebook"></a></li>
-                <li><a href="https://www.linkedin.com/"><img src="images\LinkedIn.png" alt="LinkedIn"></a></li>
-                <li><a href="https://x.com/"><img src="images\XLogo.png" alt="X"></a></li>
-                <li><a href="https://www.instagram.com/?hl=en"><img src="images\Instagram.png" alt="Instagram"></a></li>
-                <li><a href="https://github.com/"><img src="images\GitHub.png" alt="GitHub"></a></li>
+                <li><a href="https://www.facebook.com/groups/2039916366782910"><img src="images\Facebook.png" alt="Facebook"></a></li>
+                <li><a href="https://www.linkedin.com/groups/16022044/"><img src="images\LinkedIn.png" alt="LinkedIn"></a></li>
+                <li><a href="https://www.reddit.com/r/TeamAlphaCSC131/"><img src="images\Reddit.png" alt="Reddit"></a></li>
+                <li><a href="https://www.instagram.com/teamalphacsc131/"><img src="images\Instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://github.com/MGraf-Csus/Team-Alpha-Quiz-Project"><img src="images\GitHub.png" alt="GitHub"></a></li>
             </ul>
         </nav>
         <div class="copyright">
             <p>&copy; Team Alpha, CSC 131, Fall 2025. All rights reserved.</p>
         </div>
-        
     </div>
 </footer>

@@ -1,22 +1,16 @@
-import { signInUsernamePassword, createAccountWithUsernamePassword, addDocument, deleteDocument, saveDocument, getDocumentData } from "./FirebaseHandler.js"
+import { signInUsernamePassword, createAccountWithUsernamePassword, addDocument, deleteDocument, saveDocument, getDocumentData, getDocumentIDS } from "./FirebaseHandler.js"
+import { Quiz } from './Quiz.js';
+import { Item } from './Item.js';
+import { StudentScore } from './StudentScore.js';
 
-// ------------------ IMPORTANT CREATE THE ITEM, STUDENTSCORE, AND QUIZ CLASSES THEN UNCOMMENT THOSE IMPORTS ------------------- //
-// -------------------- OTHERWISE THE GET QUIZ FUNCTION WILL EXPLODE INTO A MILLION PIECES SPONGEBOB STYLE --------------------- //
-
-// import { Quiz } from './Quiz.js';
-// import { Item } './Item';
-// import { StudentScore } './StudentScore';
 
 export class BackendExtensionService {
+    test = 1;
 
     constructor() {}
 
     // -------------------- Account Methods --------------------
 
-    // Keep in mind the database has two collections (Folders) users and quizzes by default and within
-    // those collections have documents (In the form of js objects).
-
-    // Sign in by checking email and password in 'users' collection
     async signIn(username, password) {
         return await signInUsernamePassword(username, password);
     }
@@ -40,7 +34,6 @@ export class BackendExtensionService {
     // -------------------- Quiz Methods --------------------
 
     async createQuiz(quiz) {
-        console.log(quiz);
         return await addDocument("quizzes", quiz.id, this.#parseQuizForDatabase(quiz));
     }
 
@@ -48,23 +41,29 @@ export class BackendExtensionService {
         return await saveDocument("quizzes", quizId, this.#parseQuizForDatabase(quiz));
     }
 
+    async getAllUserIDS() {
+        return await getDocumentIDS("users");
+    }
+    async getAllQuizIDS() {
+        return await getDocumentIDS("quizzes");
+    }
+
+    async getQuizTakingView(quizId) {
+        return this.#setQuizQuestionsRandomToBeTakin(this.#convertToQuiz(await getDocumentData("quizzes", quizId)));
+    }
+
     async getQuiz(quizId) {
         return this.#convertToQuiz(await getDocumentData("quizzes", quizId));
     }
 
     async deleteQuiz(quizId) {
-        try {
-            await deleteDocument("quizzes", quizId);
-            return true;
-        } catch {
-            return false;
-        }
+        return await deleteDocument("quizzes", quizId);
     }
 
     // -------------------------- "Magic" Helper Functions for other methods -------------------------- //
     // Quiz method Helper funcitons for parsing quiz to be saved to DB
     #parseQuizForDatabase(quiz) {
-
+        
         const itemsAsObject = Object.fromEntries(
             quiz.items.map((item, index) => [index, this.#itemToObject(item)])
         );
@@ -88,7 +87,7 @@ export class BackendExtensionService {
         return {
             question: item.question,
             choices: this.#arrayToObject(item.choices),
-            answer: item.answer
+            correctAnswer: item.correctAnswer
         };
     }
     #arrayToObject(array) {
@@ -99,7 +98,7 @@ export class BackendExtensionService {
     #convertToQuiz(parsedQuiz) {
         const quiz = new Quiz();
         const items = Object.values(parsedQuiz.items).map(obj =>
-            new Item(obj.question, Object.values(obj.choices), obj.answer)
+            new Item(obj.question, Object.values(obj.choices), obj.correctAnswer)
         );
         const studentScores = Object.entries(parsedQuiz.studentScores).map(([studentId, score]) => new StudentScore(studentId, score));
         quiz.ownerId = parsedQuiz.ownerId;
@@ -108,6 +107,22 @@ export class BackendExtensionService {
         quiz.timerLength = parsedQuiz.timerLength;
         quiz.numQuestions = parsedQuiz.numQuestions;
         quiz.studentScores = studentScores;
-        let test = new Quiz(true);
+        return quiz;
+    }
+
+    #setQuizQuestionsRandomToBeTakin(quiz) {
+        let numQuestionsToRemove = quiz.items.length - quiz.numQuestions;
+        while (numQuestionsToRemove > 0) {
+            let ranNum = this.#getRandomInt(0, quiz.items.length - 1);
+            console.log(ranNum);
+            quiz.items.splice(ranNum, 1);
+            numQuestionsToRemove--;
+        }
+        return quiz;
+    }
+    #getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

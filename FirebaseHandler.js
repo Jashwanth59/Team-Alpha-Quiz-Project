@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getFirestore, doc, setDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, deleteDoc, getDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 // --- Firebase config (DON"T TOUCH IT) ---
 const firebaseConfig = {
@@ -41,7 +41,7 @@ async function createAccountWithUsernamePassword(adminId, username, password, ro
         const docSnap = await getDoc(doc(db, 'users', username));
         if (docSnap.exists()) throw new Error("User already exists.");
         await addDocument("users", username, { adminId, username, password, role });
-        console.log("✅ Created accound");
+        console.log("✅ Created account");
         return true;
     } catch (error) {
         console.error("❌ Error creating account:", error);
@@ -169,6 +169,20 @@ async function getDocumentData(collection, docId) {
     }
 }
 
+// Retrieves all ID's in a collection
+// Returns all ID's of a collection and null if collectionName is invalid
+async function getDocumentIDS(collectionName) {
+    try {
+        const querySnapshot = await getDocs(collection(db, collectionName));
+        const docIds = querySnapshot.docs.map(doc => doc.id);
+        return docIds;
+
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
 // Retrieves a single field from a document
 // Returns the value of the requested field or null if it does not exist
 async function getDocumentDataField(collection, docId, field) {
@@ -200,4 +214,5 @@ export {
     saveDocument,
     getDocumentData,
     getDocumentDataField,
+    getDocumentIDS,
 };
