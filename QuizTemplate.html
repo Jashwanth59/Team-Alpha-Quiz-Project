@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="css.css">
+    <script type="module" src="quizTemplateScript.js"></script>
+</head>
+<body onload="initQuiz()">
+
+    <header>   
+        <div class="header-content">
+            <h1>Quiz Application</h1>
+        </div>
+    </header>
+
+    <section>
+        <div class="body-content">
+            <div class="side-navbar">
+                <ul>
+                    <li><a href="QuizApplet.html">Quiz Home</a></li>
+                    <li><a href="AboutPage.html">About Us</a></li>
+                    <li><a href="CreditsPage.html">Credits</a></li>
+                    <li><a href="ContactPage.html">Contact</a></li>
+                    <li id="admin"><a href="AdminSign-in.html">Admin</a></li>
+                </ul>
+            </div>
+
+            <div class="main-body">
+                <div class="quiz-status">
+                    <div class="status-item">
+                        <span class="status-label">Timer</span>
+                        <span id="timer" class="status-value">--:--:--</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Questions Answered</span>
+                        <span id="questions-answered" class="status-value">0 / 0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Score</span>
+                        <span id="quiz-submitted-score" class="status-value">--</span>
+                    </div>
+                </div>
+
+                <h2 class="page-titles">Quiz 1:</h2>
+                <!-- All questions will be injected here by JavaScript -->
+                <div class="questions-body"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="https://www.facebook.com/"><img src="images/Facebook.png" alt="Facebook"></a></li>
+                    <li><a href="https://www.linkedin.com/"><img src="images/LinkedIn.png" alt="LinkedIn"></a></li>
+                    <li><a href="https://x.com/"><img src="images/XLogo.png" alt="X"></a></li>
+                    <li><a href="https://www.instagram.com/?hl=en"><img src="images/Instagram.png" alt="Instagram"></a></li>
+                    <li><a href="https://github.com/"><img src="images/GitHub.png" alt="GitHub"></a></li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                <p>&copy; Team Alpha, CSC 131, Fall 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Confirmation window when submitting quiz -->
+    <div id="confirmModal" class="confirm-modal hidden">
+        <div class="confirm-box">
+            <p id="confirmText"></p>
+            <div class="confirm-buttons">
+                <button id="confirmYes">Yes</button>
+                <button id="confirmNo">No</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
