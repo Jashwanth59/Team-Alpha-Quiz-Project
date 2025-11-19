@@ -4,7 +4,7 @@ import { Item } from './Item.js';
 import { StudentScore } from './StudentScore.js';
 
 
-export class BackendExtensionService {
+class BackendExtensionService {
     test = 1;
 
     constructor() {}
@@ -114,7 +114,7 @@ export class BackendExtensionService {
         let numQuestionsToRemove = quiz.items.length - quiz.numQuestions;
         while (numQuestionsToRemove > 0) {
             let ranNum = this.#getRandomInt(0, quiz.items.length - 1);
-            console.log(ranNum);
+            // console.log(ranNum);
             quiz.items.splice(ranNum, 1);
             numQuestionsToRemove--;
         }
@@ -126,3 +126,6 @@ export class BackendExtensionService {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
+
+// Singleton export
+export const service = new BackendExtensionService();
