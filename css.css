@@ -1,8 +1,12 @@
  @font-face {
-      font-family: Roboto;
-      src: url(fonts/Roboto-VariableFont.ttf);
-    }
+    font-family: Roboto;
+    src: url(fonts/Roboto-VariableFont.ttf);
+}
 
+/* Added global base font size (DH) */
+html {
+    font-size: clamp(15px, 0.8vw, 19px);
+}
 
 body {
     margin: 0px;
@@ -23,22 +27,13 @@ header {
 .main-body{
     flex: 9;
     float: left;
+    position: relative;
     border: 1px solid rgb(58, 64, 90);
     padding: 40px;
 }
 
 .page-titles{
     margin: 0;
-}
-
-#timer {
-    margin: 0;
-    float: right;
-
-}
-
-.hiddenAnswer {
-    visibility: hidden;
 }
 
 .main-body h3 {
@@ -60,6 +55,281 @@ header {
 #about-body h4 {
     font-weight: normal;
 }
+
+
+
+
+/* ======================= ========================= ======================= */
+/* =======================   QUIZ HOME STYLING CSS   ======================= */
+/* ======================= ========================= ======================= */
+
+
+/* ========================= Titles / Headers ========================= */
+#quiz-home-page-title {
+    margin: 0;
+    padding: 0;
+    border-bottom: 3px solid white;
+}
+
+#quiz-home-list-header {
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+
+/* ========================= Quiz List ========================= */
+.main-body .quiz-list-container .quiz-name-wrapper {
+    width: clamp(150px, 40%, 650px);
+    margin-bottom: 1.5rem;
+    border: 2px solid white;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.main-body .quiz-list-container .quiz-name-wrapper:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    border-color: #d0d0d0;
+}
+
+.main-body .quiz-list-container .quiz-name-wrapper .quiz-name {
+    margin: 0;
+    height: 2rem;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ========================= Link Styling ========================= */
+.main-body .quiz-list-container .quiz-name-wrapper .quiz-name a {
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+    width: auto;
+    height: 100%;
+    color: #000;
+    text-decoration: none;
+}
+
+.main-body .quiz-list-container .quiz-name-wrapper:hover .quiz-name a {
+    color: #f0f0f0;
+}
+
+/* End of quiz home css */
+
+
+
+
+/* ======================= ========================= ======================= */
+/* ======================= QUIZ TEMPLATE STYLING CSS ======================= */
+/* ======================= ========================= ======================= */
+
+
+/* ================== Quiz status container styling ================== */
+.main-body .quiz-status {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+
+    padding: 1.5rem 1.2rem;
+    min-width: 160px;
+
+    border: 2px solid #ffffff;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(6px);
+
+    font-weight: bold;
+    color: #000000;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: 0.25s ease;
+}
+
+/* Status items */
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Labels */
+.status-label {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* Values like timer, counter, score */
+.status-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+/* ================== Question Container ================== */
+.main-body .question-container {
+    width: clamp(260px, 55%, 650px);
+    margin: 3rem 0;
+    padding: 1.8rem 1.2rem;
+
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(6px);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    transition: 0.25s ease;
+}
+
+/* ================== Question Headers ================== */
+.main-body .question-number {
+    margin: 0 0 0.8rem 0;
+    padding-bottom: 0.5rem;
+
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.main-body .question-text {
+    margin: 1.2rem 0 1.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+}
+
+/* ================== Choices Wrapper ================== */
+.main-body .choices-wrapper {
+    width: clamp(0px, 80%, 480px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ================== Choice Buttons ================== */
+.main-body .choices-wrapper button {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+    width: 100%;
+
+    border: none;
+    border-radius: 10px;
+
+    color: #000;
+    background: #ffffff;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+    will-change: transform, box-shadow;
+}
+
+.main-body .choices-wrapper button:hover {
+    transform: scale(1.025);
+    background-color: #d6e8ff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+}
+
+.main-body .choices-wrapper .selected-choice {
+    background-color: #2e2e2e !important;
+    color: #fff;
+    /* box-shadow: 0 0 12px rgba(0, 255, 0, 0.25); */
+}
+
+/* ================== Quiz Submit Button ================== */
+.main-body .quiz-submit-btn {
+    margin-top: 3rem;
+
+    padding: 0.9rem 2.2rem;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: 600;
+
+    background-color: #ffffff;
+    color: #000;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.125s ease-in-out;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.main-body .quiz-submit-btn:hover {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.main-body .quiz-submit-btn:active {
+    background-color: #2a2a2a;
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+}
+
+/* ================== Submit Confirmation Window ================== */
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.confirm-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 260px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    animation: fadeIn 0.15s ease-out;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.3rem;
+}
+
+.confirm-buttons button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #2e2e2e;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.confirm-buttons button:hover {
+    transform: scale(1.05);
+}
+
+/* End of quiz template css */
+
+
 
 #contact-body li {
     list-style-type: none;
