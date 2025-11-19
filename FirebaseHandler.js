@@ -176,10 +176,9 @@ async function getDocumentIDS(collectionName) {
         const querySnapshot = await getDocs(collection(db, collectionName));
         const docIds = querySnapshot.docs.map(doc => doc.id);
         return docIds;
-
     } catch (error) {
         console.error(error);
-        return null;
+        return [];
     }
 }
 
