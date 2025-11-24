@@ -51,6 +51,8 @@
                         <th>Correct Answer</th>
                     </tr>
                 </table>
+                <li><button type="button" onclick="addTableRow()">Add possible question</button></li>
+                <li><button type="button" onclick="createNewQuiz()">Create Quiz</button></li>
 
                 <li><button type="button" onclick="window.location.href='AdminControlPanel.html'">Go Back</button></li>
             </ul>
@@ -77,7 +79,7 @@
 <body>
 <script>
     function onloaded() {
-        editQuiz();
+        editQuizPage();
     }
     window.onload = function() {
         onloaded();

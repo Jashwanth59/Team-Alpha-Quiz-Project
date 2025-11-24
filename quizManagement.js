@@ -26,22 +26,31 @@ export function addTableRow() {
 }
 
 export async function createNewQuiz() {
-    // TEMP VALUE
-    let ownerId = "1";
+    //popup to confirm
+    let confirmation = confirm("Are you wanting to save the quiz with these changes?");
+    if (confirmation) {
 
-    // defining each part of a Quiz object
-    let id = document.getElementById("quizNameInput").value;
-    let items = defineItems();
-    let timerLength = document.getElementById("timerLengthInput").value;
-    let numQuestions = document.getElementById("quizQuestionAmountInput").value;
-    let studentScores = [];
+        // TEMP VALUE
+        let ownerId = "1";
 
-    // newQuiz object defined
-    let newQuiz = new Quiz(ownerId, id, items, timerLength, numQuestions, studentScores)
+        // defining each part of a Quiz object
+        let id = document.getElementById("quizNameInput").value;
+        let items = defineItems();
+        let timerLength = document.getElementById("timerLengthInput").value;
+        let numQuestions = document.getElementById("quizQuestionAmountInput").value;
+        let studentScores = [];
 
-    // sending quiz to database
-    console.log(newQuiz);
-    await service.createQuiz(newQuiz);
+        // newQuiz object defined
+        let newQuiz = new Quiz(ownerId, id, items, timerLength, numQuestions, studentScores)
+
+        // sending quiz to database
+        console.log(newQuiz);
+        await service.createQuiz(newQuiz);
+    }
+    else {
+        console.log("quiz was not created/updated.");
+    }
+
 }
 function defineItems() {
     // gather the input text from cell
@@ -70,6 +79,7 @@ export async function listQuizzes() {
     console.log("table cleared!");
     console.log(docIds);
 
+
     for (let i = 0; i < docIds.length; i++) {
 
         let quiz = await service.getQuiz(docIds[i]);
@@ -88,17 +98,120 @@ export async function listQuizzes() {
         cell2.innerHTML = quiz.getQuestionCount();
         cell3.innerHTML = quiz.getOwnerId();
         cell4.innerHTML = quiz.getTimerLength();
-        cell5.innerHTML = "<button onclick=\"window.location.href='EditQuiz.html'\">Edit</button>";
+        cell5.innerHTML = `<button onclick="window.location.href='EditQuiz.html?id=${encodeURIComponent(quizId)}'">Edit</button>`;
         cell6.innerHTML = "<button onclick='deleteQuiz(this)'>Delete</button>";
     }
 
+
+
 }
 
-export function editQuiz(button) {
-    const row = button.closest('tr');
-    const id = row.cells[0].textContent;
-    let quiz = service.getQuiz(id);
-    document.getElementById('quizQuestionAmountInput').value = quiz.getQuestionCount();
+
+export async function editQuizPage() {
+
+    // Gather and define quiz id
+    const params = new URLSearchParams(window.location.search);
+    const quizId = params.get('id');
+
+    // get quiz object
+    let quiz = await service.getQuiz(quizId);
+
+    // get number of questions to show.
+    // and setting input field to the length of quiz
+    let length = quiz.getQuestionCount();
+    document.getElementById("quizQuestionAmountInput").value = length;
+
+    // define list for quiz items (questions)
+    let items = quiz.getQuizItems();
+    console.log(items);
+
+    //setting input field to timer length
+    document.getElementById("timerLengthInput").value = quiz.getTimerLength();
+    // setting input field for quiz name
+    document.getElementById("quizNameInput").value = quizId ;
+    //reference to table
+    const table = document.getElementById("quizQuestionList");
+    // finding table body
+    const tablebody = document.querySelector("tbody");
+
+
+    // construction for length of question count
+    for (let i = 0; i < items.length; i++) {
+        // creating new table row
+        const quizQuestionContainer = document.createElement("tr");
+
+        let answers = items[i].getChoices();
+        tablebody.appendChild(quizQuestionContainer);
+        const fragment = document.createDocumentFragment();
+
+        const question = document.createElement("td");
+        const questionin  = document.createElement("input");
+        questionin.type = "text";
+        questionin.size = 15;
+        questionin.name = "Question";
+        questionin.placeholder = "Enter question";
+        questionin.value = items[i].getQuestion();
+
+        const q1 = document.createElement("td");
+        const q1in = document.createElement("input");
+        q1in.type = "text";
+        q1in.size = 15;
+        q1in.name = "answerA";
+        q1in.placeholder = "Enter answer A";
+        q1in.value = answers[0];
+
+
+        const q2 = document.createElement("td");
+        const q2in = document.createElement("input");
+        q2in.type = "text";
+        q2in.size = 15;
+        q2in.name = "answerB";
+        q2in.placeholder = "Enter answer B";
+        q2in.value = answers[1];
+
+        const q3 = document.createElement("td");
+        const q3in = document.createElement("input");
+        q3in.type = "text";
+        q3in.size = 15;
+        q3in.name = "answerC";
+        q3in.placeholder = "Enter answer C";
+        q3in.value = answers[2];
+
+        const q4 = document.createElement("td");
+        const q4in = document.createElement("input");
+        q4in.type = "text";
+        q4in.size = 15;
+        q4in.name = "answerD";
+        q4in.placeholder = "Enter answer D";
+        q4in.value = answers[3];
+
+        const answer = document.createElement("td");
+        const answerin = document.createElement("input");
+        answerin.type = "text";
+        answerin.size = 15;
+        answerin.name = "correctAnswer";
+        answerin.placeholder = "answer (a,b,c,d)";
+        console.log(items[i].getLetterAnswer());
+        answerin.value = items[i].getLetterAnswer();
+
+        question.appendChild(questionin);
+        fragment.appendChild(question);
+        q1.appendChild(q1in)
+        fragment.appendChild(q1);
+        q2.appendChild(q2in);
+        fragment.appendChild(q2);
+        q3.appendChild(q3in);
+        fragment.appendChild(q3);
+        q4.appendChild(q4in);
+        fragment.appendChild(q4);
+        answer.appendChild(answerin);
+        fragment.appendChild(answer);
+
+        quizQuestionContainer.appendChild(fragment);
+        tablebody.appendChild(quizQuestionContainer);
+
+
+    }
 
 }
 
@@ -117,5 +230,5 @@ export function deleteQuiz(button) {
 window.addTableRow = addTableRow;
 window.createNewQuiz = await createNewQuiz;
 window.listQuizzes = listQuizzes;
-window.editQuiz = editQuiz;
+window.editQuizPage = editQuizPage;
 window.deleteQuiz = deleteQuiz;
